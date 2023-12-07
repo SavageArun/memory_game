@@ -1,0 +1,336 @@
+ <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji Place Guessing Game</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <style>
+    body {
+        background: url('background-image.jpg'); /* 'background-image.jpg' with your image file */
+        background-size: cover;
+      }
+      
+      *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:monospace;
+}
+body{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    /* min-height:100vh; */
+    background:rgb(218, 218, 251);
+}
+.container{
+    width:40vw;
+    height: auto;
+    position:relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column;
+    border-radius:10px;
+    gap:0.938rem;
+    background: rgb(130, 130, 244);
+    padding:2.5rem 2.5rem 2.5rem 2.5rem;   
+      
+}
+h2{
+    font-size:2em;
+    color:#fff;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+.reset{
+    padding:0.938rem 1.25rem;
+    color:rgb(130, 130, 244);
+    background: #fff;
+    border:none;
+    border-radius: 5px;
+    font-size:1.5em;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 600;
+}
+.reset:focus{
+    color:#fff;
+    background:rgb(218, 218, 251);
+}
+.game{
+    width: 90%;
+    height: auto;
+    display: grid;
+    grid-template-rows: 5rem 5rem 5rem 5rem;
+    grid-template-columns: 5rem 5rem 5rem 5rem;
+    gap: 0.5rem;
+ 
+    transform-style: preserve-3d;
+    perspective: 500px;
+    justify-content: center;
+}
+.item{
+    position:relative;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    font-size:3em;
+    border-radius: 5px;
+    background: #fff;
+    transform: rotateY(180deg);
+    transition: 0.25s;
+ 
+}
+.item.boxOpen{
+    transform: rotateY(0deg);
+}
+.item::after{
+    content:'';
+    position:absolute;
+    border-radius: 5px;
+    inset:0;
+    background: rgb(218, 218, 251);
+    transition: 0.25s;
+    transform: rotateY(0deg);
+    backface-visibility: hidden;
+
+}
+.boxOpen:after ,
+.boxMatch:after
+ 
+{
+    transform:rotateY(180deg);
+}
+
+/* Extra small devices (phones, 400px and down) */
+@media only screen and (max-width: 400px) {
+    
+    .container{
+        width:90vw;
+        height: auto;
+        
+    }
+    h2{
+        font-size:1.5em;
+        letter-spacing: 0.1em;
+    }
+    .reset{
+        padding:10px 15px;
+        font-size:1.2em;
+        letter-spacing: 0.1em;
+        font-weight: 200;
+    }
+    .game{
+    
+        width: 18rem;
+        height: auto;
+        
+        gap: 0.025rem;
+    
+      
+    }
+    .item{
+        width:4rem;
+        height:4rem;
+        font-size:2.5em;
+    }
+} 
+
+/* Extra small devices (phones, 400px to 600px) */
+@media (max-width: 600px) and (min-width:400px){
+    
+    .container{
+        width:90vw;
+        height: auto;
+        
+    }
+    h2{
+        font-size:2em;
+        letter-spacing: 0.1em;
+    }
+    .reset{
+        padding:10px 15px;
+        font-size:1.5em;
+        letter-spacing: 0.1em;
+        font-weight: 200;
+    }
+    .game{
+    
+        width: 18rem;
+        height: auto;
+        
+        gap: 0.025rem;
+    
+      
+    }
+    .item{
+        width:4rem;
+        height:4rem;
+        font-size:2.5em;
+    }
+} 
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .container{
+        width:60vw;
+        height: auto;
+        
+    }
+    h2{
+        font-size:2em;
+        letter-spacing: 0.1em;
+    }
+    .reset{
+        padding:10px 15px;
+        font-size:1.5em;
+        letter-spacing: 0.1em;
+        font-weight: 200;
+    }
+    .game{
+    
+        width: 18rem;
+        height: auto;       
+        gap: 0.4rem;
+    
+      
+    }
+    .item{
+        width:5rem;
+        height:5rem;
+        font-size:3em;
+    }
+   
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .container{
+        width:40vw;
+        height: auto;
+        
+    }
+    h2{
+        font-size:1.5em;
+        letter-spacing: 0.1em;
+    }
+    .reset{
+        padding:10px 15px;
+        font-size:1.5em;
+        letter-spacing: 0.1em;
+        font-weight: 200;
+    }
+    .game{
+    
+       
+        gap: 0.5rem;
+        width:18rem;
+        height:auto;
+    
+      
+    }
+    .item{
+        width:4rem;
+        height:4rem;
+        font-size:2em;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .container{
+        width:30vw;
+        height: auto;
+        
+    }
+    h2{
+        font-size:1.7em;
+        
+        letter-spacing: 0.1em;
+    }
+    .game{
+        width:20rem;
+        height:auto;
+    }
+    .item{
+        width:3.5rem;
+        height:3.5rem;
+        font-size:2em;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .container{
+        width:30vw;
+        height: auto;
+        
+    }
+    h2{
+        font-size:2em;
+        letter-spacing: 0.1em;
+    }
+    .game{
+        width:20rem;
+        height:auto;
+    }
+    .item{
+        width:3.5rem;
+        height:3.5rem;
+        font-size:2em;
+    }
+}
+      
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Memory Sharpener</h2>
+        <div class="game"></div>
+        <button class="reset" onclick="window.location.reload()">Reset Game</button>
+    </div>
+    <script>
+        const emojis=["🤓", "🤓","👑", "👑", "😈", "😈", "💀", "💀", "👽",
+        "👽", "🎃", "🎃", "👾", "👾", "🖐", "🖐"];
+         var shuf_emojis = emojis.sort(()=>(Math.random() > .5) ? 2 : -1);
+         for(var i=0;i<emojis.length;i++){
+            let box=document.createElement('div');
+            box.className = 'item';
+            box.innerHTML = shuf_emojis[i];
+            
+
+            box.onclick = function(){
+                this.classList.add('boxOpen')
+                setTimeout(function(){
+                    if(document.querySelectorAll('.boxOpen').length > 1){
+                        if(document.querySelectorAll('.boxOpen')[0].innerHTML==
+                        document.querySelectorAll('.boxOpen')[1].innerHTML){
+                            document.querySelectorAll('.boxOpen')[0].classList.add('boxMatch');
+                            document.querySelectorAll('.boxOpen')[1].classList.add('boxMatch');
+
+                            document.querySelectorAll('.boxOpen')[1].classList.remove('boxOpen');
+                            document.querySelectorAll('.boxOpen')[0].classList.remove('boxOpen');
+
+                            if(document.querySelectorAll('.boxMatch').length == emojis.length){
+                                alert('Congratulations! You Win');
+                            }
+                        }
+                        else{
+                            document.querySelectorAll('.boxOpen')[1].classList.remove('boxOpen');
+                            document.querySelectorAll('.boxOpen')[0].classList.remove('boxOpen');
+                        }
+                        
+                    }
+                },500)
+
+            }
+            document.querySelector('.game').appendChild(box);
+         }
+         
+    </script>
+    
+</body>
+</html>
